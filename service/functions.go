@@ -66,12 +66,12 @@ func Run(numberOfGoroutines int, data []Data) error {
 		} else {
 			lastIndex = (i+1)*processRange - 1
 		}
-		go func(j int) {
+		go func() {
 			mu.Lock()
 			defer mu.Unlock()
 			defer wg.Done()
 			result += calculate(data, firstIndex, lastIndex)
-		}(i)
+		}()
 	}
 
 	wg.Wait()
